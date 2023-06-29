@@ -57,8 +57,8 @@ def process_main_link(url):
     while True:
         path = urlparse(url).path.strip('/').split('/')
         pagenumber = path.pop() if path[-1].isdigit() else 1
-        subdomain = os.path.join(*path)
-        html = rym_save(name=url, sd=subdomain, fn=f'{pagenumber}.html')
+        subdirectory = os.path.join(*path)
+        html = rym_save(name=url, sd=subdirectory, fn=f'{pagenumber}.html')
         soup = BeautifulSoup(html, 'lxml')
 
         cards_in_this_page = process_single_rym_page(soup)

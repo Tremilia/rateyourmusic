@@ -36,8 +36,8 @@ def safe_get(url, accepted_codes=[], max_tries=None, params=None, must_be_ok=Fal
 Response gave not okay status code {response.status_code}.
 Check if you are banned.
                 """)
-        except requests.exceptions.ConnectionError:
-            pass
+        except requests.exceptions.ConnectionError as e:
+            raise e("Session timeout. Probably an indication of IP banned. Refresh in your private browsing tab to check if you are banned.")
         s = int(n**.5+1)
         print(f'download failed - sleeping for {s} seconds - {url}')
         sleep(s)
