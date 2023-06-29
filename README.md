@@ -1,6 +1,6 @@
 ## Webscraping example
 
-This repository and the tasks below exemplify a general recipe for scraping any website that has nicely-structured data, by copying cURL commands for http requests. Follow this recipe to get a feel for how to access data from APIs that don't come with a manual.
+This repository and the tasks below exemplify a general recipe for scraping any website that has nicely-structured data, by copying cURL commands for http requests, and caching http response data locally. Follow this recipe to get a feel for how to access data from APIs that don't come with a manual.
 
 ## RYM data analysis
 
@@ -8,7 +8,7 @@ The RUN script of this python repository will download all the pages in a rateyo
 
 # CAUTION
 
-It is highly recommended that you only scrape RYM (and glitchwave) through a VPN connection. The Sonemic, Inc. firewall is more banhappy against bots than is the average website. There is a safeguard in the API module of this repository that will abort mission at a single non-okay http response code, and another safeguard that will exit the script if the saved cookies and headers are more than 60 minutes old. Hopefully these safeguards will make it so you only get a captcha check and not an IP ban when the RYM firewall gets suspicious. But if you do get an IP ban, it would be better if it were a VPN server's IP and not your home IP.
+It is highly recommended that you only scrape RYM (and glitchwave) through a VPN connection. The Sonemic, Inc. firewall is more ban-happy against bots than is the average website. There is a safeguard in the API module of this repository that will abort mission at a single non-okay http response code, and another safeguard that will exit the script if the saved cookies and headers are more than 60 minutes old. Hopefully these safeguards will make it so you only get a captcha check and not an IP ban when the RYM firewall gets suspicious. But if you do get an IP ban, it would be better if it were a VPN server's IP and not your home IP.
 
 ## Instructions
 
@@ -24,17 +24,17 @@ It is highly recommended that you only scrape RYM (and glitchwave) through a VPN
 
 5. Connect to your VPN.
 
-6. Open a private browsing session of your browser.
+6. Open a private browsing session of your browser. In the private browsing session, visit rateyourmusic.com so that site cookies populate in the browsing session.
 
-7. Open the developer tools of the browser tab before proceeding (typically by pressing F12).
+7. Open the developer tools of the private browser tab before proceeding (typically by pressing F12).
 
 8. Navigate to a main link for a rateyourmusic top chart. An example main link to a top chart is given in the RUN script of this repository, commented out to start with. Either un-comment the main link in the RUN script now and use it for the remaining steps, or replace it with the other main link of your choosing.
 
-9. If your VPN server is already blocked by RYM, try connecting to a couple different servers on your VPN network until you find one that isn't blocked.
+9. If your VPN server is already blocked by RYM, then close the private browsing tab, disconnect from your VPN, and start again from step 5. with a different server on your VPN network. Try connecting to a few different servers on your VPN network until you find one that isn't blocked.
 
 10. Now that you have loaded a main page of a top chart, navigate to the network monitor of the open developer tools in your browser tab. It should have recorded all the http requests of the browsing session (if not, refresh the page). Hover your mouse on the "Name" of the first http request. A tooltip should appear with a url. The url should match the main link you chose for the top chart.
 
-11. Right click on the first http request and clcik Copy > Copy as cURL (bash)
+11. Right click on the first http request and click Copy > Copy as cURL (bash)
 
 12. Visit https://curlconverter.com/
 
@@ -48,6 +48,6 @@ It is highly recommended that you only scrape RYM (and glitchwave) through a VPN
 python -m rateyourmusic.run_scraper
 ```
 
-16. In your CLI you should see messages giving feedback that individual chart pages are being downloaded, and it will print out the "object_release" card data from the pages as they come in.
+16. In your CLI you should see messages giving feedback that individual chart pages are being downloaded, and it will print out the "object_release" card data from the pages as they come in. The individual chart pages will save locally to a _data directory.
 
 Happy coding!
